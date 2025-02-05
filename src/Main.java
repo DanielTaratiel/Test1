@@ -13,8 +13,11 @@ public class Main {
 
 
         public static int sumaPrimerosNumeros(int cantidad){
+            if(cantidad <= 0){
+                throw new IllegalArgumentException("El numero debe ser mayor que 0");
+            }
             int suma = 0;
-            for (int i = 0; i < cantidad; i++) {
+            for (int i = 1; i <= cantidad; i++) {
                 suma += i;
             }
             return suma;

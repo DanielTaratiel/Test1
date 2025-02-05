@@ -9,7 +9,8 @@ class MainTest {
         assertAll(
                 () -> assertEquals(1, Main.sumaPrimerosNumeros(1)),
                 () -> assertEquals(15, Main.sumaPrimerosNumeros(5)),
-                () -> assertEquals(5050, Main.sumaPrimerosNumeros(100))
+                () -> assertEquals(5050, Main.sumaPrimerosNumeros(100)),
+                () -> assertThrows(IllegalArgumentException.class, () -> Main.sumaPrimerosNumeros(-1))
         );
     }
 }
