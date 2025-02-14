@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 // Nombre que aparece cuando se lanzan los test de esta clase.
 @DisplayName("Ejemplos de Test Unitarios en la Clase Main")
@@ -20,7 +21,7 @@ class MainTest {
     static PrintStream originalOut = System.out;
 
     @BeforeAll
-    public static void setupAll() throws UnsupportedEncodingException {
+    public static void setupAll() {
 
         // Guardamos la entrada por teclado en old.
         old=System.in;
@@ -57,14 +58,14 @@ class MainTest {
     @DisplayName("Test del método main()")
     // Este test se ejecuta el segundo.
     @Order(2)
-    void main() throws UnsupportedEncodingException {
+    void mainTest() {
         String inputString = "5\n";
         String outputString =
                 "Introduce un número positivo" + System.lineSeparator() +
                 "El resultado es: 15" + System.lineSeparator();
 
         // La nueva entrada por teclado es establecida con  inputString.
-        System.setIn(new ByteArrayInputStream(inputString.getBytes("UTF-8")));
+        System.setIn(new ByteArrayInputStream(inputString.getBytes(StandardCharsets.UTF_8)));
         Main.main(null);
 
         // Comparamos la salida esperada con la real.
@@ -77,9 +78,10 @@ class MainTest {
     @Order(1)
     @EnabledOnOs(value = {OS.LINUX, OS.WINDOWS})
     @EnabledOnJre(value = {JRE.JAVA_18})
-    void sumaPrimerosNumeros() {
+    void sumaPrimerosNumerosTest() {
         assertAll(
                 () -> assertEquals(1, Main.sumaPrimerosNumeros(1), "Suma 1 número"),
+                () -> assertEquals(3, Main.sumaPrimerosNumeros(2), "Suma 2 números"),
                 () -> assertEquals(15, Main.sumaPrimerosNumeros(5), "Suma 5 números"),
                 () -> assertEquals(5050, Main.sumaPrimerosNumeros(100), "Suma 10 números"),
                 () -> assertThrows(IllegalArgumentException.class, () -> Main.sumaPrimerosNumeros(-1), "Cantidad Negativa")
@@ -89,7 +91,7 @@ class MainTest {
     @Test
     @DisplayName("Test para comparar arrays")
     @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_11) // Podemos activar o desactivar el test para un rango de JRE
-    public void arrayEquals() {
+    public void arrayEqualsTest() {
         // Arrange, preparamos el test
         int[] valor = {1,2,3,4,5};
         int[] esperado = {1,2,3,4,5};
@@ -98,7 +100,7 @@ class MainTest {
 
         // Comprobamos resulatdos de dos maneras.
         assertAll(
-                () -> assertEquals(esperado, valor, "Las variables no son iguales"),
+                //() -> assertEquals(esperado, valor, "Las variables no son iguales"),
                 () -> assertArrayEquals(esperado, valor, "Los array no son iguales")
         );
 
