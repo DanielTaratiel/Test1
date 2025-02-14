@@ -19,7 +19,7 @@ public class Main {
                 throw new IllegalArgumentException("El numero debe ser mayor que 0");
             }
 
-            return (1+cantidad)/2*cantidad;
+            return (int) ((1+cantidad)/2.0*cantidad);
         }
 
 }
